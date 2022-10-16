@@ -36,7 +36,7 @@ class TD::Client
     on TD::Types::Update::AuthorizationState do |update|
       case update.authorization_state
       when TD::Types::AuthorizationState::WaitTdlibParameters
-        set_tdlib_parameters(parameters: TD::Types::TdlibParameters.new(**@config))
+        set_tdlib_parameters(**@config)
       when TD::Types::AuthorizationState::WaitEncryptionKey
         check_database_encryption_key(encryption_key: TD.config.encryption_key).then do
           @ready_condition_mutex.synchronize do
